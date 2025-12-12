@@ -16,8 +16,7 @@ public class ConsultaMoneda {
                 .build();
 
         try {
-            HttpResponse<String> response = client
-                    .send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             Gson gson = new Gson();
             Moneda miRespuesta = gson.fromJson(response.body(), Moneda.class);

@@ -1,15 +1,4 @@
-/* MENU:
-1 - DOLAR => PESO
-2 - PESO => DOLAR
-3 - DOLAR => REAL BRASILEÑP
-4 - REAL => DOLAR
-5 - DOLAR => PESO COLOMBIANO
-6 - PESO COLOMABIANO => DOLAR
-7 - SALIR
-ELIJA:
-*/
-
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConvertirMoneda {
@@ -32,8 +21,6 @@ public class ConvertirMoneda {
             System.out.println("Elija la opcion: ");
 
             try {
-
-
                 opcion = lectura.nextInt();
                 lectura.nextLine();
 
@@ -42,53 +29,53 @@ public class ConvertirMoneda {
                     break;
                 }
 
-                String codigoBase = "";
-                String codigoTarget = "";
+                String monedaBase = "";
+                String monedaDestino = "";
 
                 // Configuramos los códigos según la opción
                 switch (opcion) {
                     case 1:
-                        codigoBase = "USD";
-                        codigoTarget = "ARS";
+                        monedaBase = "USD";
+                        monedaDestino = "ARS";
                         break;
                     case 2:
-                        codigoBase = "ARS";
-                        codigoTarget = "USD";
+                        monedaBase = "ARS";
+                        monedaDestino = "USD";
                         break;
                     case 3:
-                        codigoBase = "USD";
-                        codigoTarget = "BRL";
+                        monedaBase = "USD";
+                        monedaDestino = "BRL";
                         break;
                     case 4:
-                        codigoBase = "BRL";
-                        codigoTarget = "USD";
+                        monedaBase = "BRL";
+                        monedaDestino = "USD";
                         break;
                     case 5:
-                        codigoBase = "USD";
-                        codigoTarget = "COP";
+                        monedaBase = "USD";
+                        monedaDestino = "COP";
                         break;
                     case 6:
-                        codigoBase = "COP";
-                        codigoTarget = "USD";
+                        monedaBase = "COP";
+                        monedaDestino = "USD";
                         break;
                     default:
                         System.out.println("Opción no válida.");
-                        continue; // Vuelve al inicio del while
+                        continue;
                 }
 
                 System.out.println("Ingrese el valor que desea convertir: ");
                 double cantidad = lectura.nextDouble();
 
-                Moneda moneda = consulta.buscaMoneda(codigoBase);
+                Moneda moneda = consulta.buscaMoneda(monedaBase);
 
-                Double tasa = moneda.conversion_rates().get(codigoTarget);
+                Double tasa = moneda.conversion_rates().get(monedaDestino);
 
                 double resultado = cantidad * tasa;
 
-                System.out.println("El valor " + cantidad + " [" + codigoBase + "] " +
-                        "corresponde al valor final de =>>> " + resultado + " [" + codigoTarget + "]");
+                System.out.println("El valor " + cantidad + " [" + monedaBase + "] " +
+                        "corresponde al valor final de =>>> " + resultado + " [" + monedaDestino + "]");
 
-            }catch (Exception e) {
+            }catch (InputMismatchException e) {
                 System.out.println("Ocurrió un error (ingrese solo números)");
                 lectura.nextLine();
             }
